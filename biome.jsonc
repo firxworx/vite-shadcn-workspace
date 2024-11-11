@@ -1,0 +1,134 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "organizeImports": {
+    "enabled": false
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        // this rule is annoying during development (it can always be turned on in CI)
+        "noUnusedImports": "off"
+      },
+      "style": {
+        "noDefaultExport": "off",
+        "noNonNullAssertion": { "level": "warn" },
+        "useImportType": { "level": "error" }
+      },
+      "complexity": {
+        // disable rule because arrow functions are in fact different vs. function syntax (e.g. they do not bind `this`)
+        // react components lose the component name with arrow functions but do not with the function() syntax
+        "useArrowFunction": { "fix": "none", "level": "off" }
+      },
+      "a11y": {
+        // the majority of our svg icons are aria-hidden so this rule is not useful
+        "noSvgWithoutTitle": {
+          "level": "off"
+        },
+        // bs rule says to use semantic elements with native alert role but wtf element is that
+        "useSemanticElements": {
+          "level": "off"
+        }
+      },
+      "suspicious": {
+        // set to warn because key={index} is ok in react for trivial cases where components will not be reordered
+        "noArrayIndexKey": { "level": "warn" }
+      },
+      "nursery": {}
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "asNeeded",
+      "jsxQuoteStyle": "double"
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true,
+      "allowTrailingCommas": false
+    },
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "css": {
+    "parser": {
+      "allowWrongLineComments": false,
+      "cssModules": false
+    }
+  },
+  "overrides": [
+    // computed keys are a common pattern with libraries such as clsx
+    {
+      "include": ["apps/**/*.tsx", "functions/**/*.ts", "packages/react-*/**"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "useLiteralKeys": "off"
+          }
+
+          // "nursery": {}
+        }
+      }
+    },
+    // false positive when putting routes in a tuple with a jsx component
+    {
+      "include": ["apps/**/router.tsx"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useJsxKeyInIterable": "off"
+          }
+        }
+      }
+    },
+    // loosen rules for tests to allow `any`
+    {
+      "include": ["**/*.test.ts", "**/*.test.tsx"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noForEach": "off"
+          },
+          "correctness": {
+            "noUnusedImports": "off"
+          },
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ],
+  "files": {
+    "ignore": [
+      // pnpm and npm format package.json differently than biome so ignore to avoid unnecessary changes in git
+      "package.json",
+
+      // other patterns (also refer to .gitignore when `vcs.useIgnoreFile` is `true`)
+      "**/node_modules",
+      "**/migrations",
+      "**/coverage",
+      "**/storybook-static"
+    ]
+  }
+}

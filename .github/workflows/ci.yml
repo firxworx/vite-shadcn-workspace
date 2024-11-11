@@ -1,0 +1,117 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# env:
+#   PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.cache/ms-playwright
+
+# permissions can also be specified at the job level
+permissions:
+  id-token: write # required for requesting signed jwt (e.g. for aws)
+  contents: read # required by actions/checkout
+  statuses: write # required for updating commit status
+  pull-requests: write # required for writing pr comments
+  # deployments: write # required by bobheadxi/deployments (uncomment if in use)
+
+jobs:
+  test:
+    name: Test & Build
+    timeout-minutes: 10
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [lts/*] # e.g. [20] [20.x, lts/*]
+        pnpm-version: [latest] # e.g. [9]
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup node ${{ matrix.node-version }}
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          architecture: ''
+
+      - name: Install pnpm
+        id: pnpm-install
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
+
+      - name: Get pnpm store path
+        id: pnpm-store-path
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent | tr -d '\n')" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        id: pnpm-setup-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-store-path.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # reminder: the pnpm-setup-cache post-action takes care of running `pnpm store prune`
+
+      - name: Install dependencies
+        id: install-dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run lint checks
+        id: eslint
+        run: pnpm ci:lint
+
+      # build must run first to ensure dist/ directories referenced package.json's are present for imports to resolve
+
+      - name: Build
+        id: build-packages
+        run: |
+          pnpm ci:build
+
+      - name: Check types
+        id: check
+        run: pnpm ci:typecheck
+
+      - name: Test
+        id: test
+        run: pnpm ci:test
+
+      - name: Report status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { owner, repo } = context.repo;
+            const { sha } = context;
+            const run_id = context.runId;
+
+            github.rest.repos.createCommitStatus({
+              owner,
+              repo,
+              sha,
+              state: 'success',
+              target_url: `https://github.com/${owner}/${repo}/actions/runs/${run_id}`,
+              description: 'CI passed!',
+              context: 'Test & Build'
+            });

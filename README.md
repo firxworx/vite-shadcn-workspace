@@ -1,0 +1,202 @@
+# vite-shadcn-workspace
+
+This repo houses an extensible pnpm [workspace](https://pnpm.io/workspaces) (monorepo) with [Vite](https://vite.dev/) and [shadcn/ui](https://ui.shadcn.com/). 
+
+It can serve as a foundation for repositories with multiple applications that share common components and logic. TaiwindCSS is configured in a way that is ideal to serve as the foundation of a design system.
+
+The [shadcn CLI](https://ui.shadcn.com/docs/cli) is configured to manage components in `packages/react-ui` (`@workspace/react-ui`). Easily add new components to the workspace with a single command.
+
+A fully functional React & Vite SPA with a starter "SaaS theme" in `apps/client` ties everything together in a deployable example.
+
+[pnpm](https://pnpm.io/) and [Syncpack](https://jamiemason.github.io/syncpack/) manage every aspect of the workspace; management frameworks such as Nx and turborepo are generally unnecessary however they can be easily added if desired.
+
+100% TypeScript + ESM.
+
+## Preview
+
+A live demo of the SPA is deployed to Cloudflare Pages:
+
+🔥🔥 https://vite-shadcn-workspace.pages.dev/ 🔥🔥
+
+## Features
+
+### Tailwind Presets
+
+The workspace includes two [tailwind presets](https://tailwindcss.com/docs/presets) for the ultimate in flexibility: `@workspace/tw-preset-shadcn` & `@workspace/tw-preset-workspace`.
+
+The first preset effectively installs shadcn/ui per its docs and it can be used on its own. The second preset depends on the first and adds workspace-specific customizations. It includes the powerful [fluid-tailwind](https://fluid.tw/) plugin for _fluid responsive_ designs.
+
+There are various advantages to using presets vs. sharing hardcoded tailwind configuration files because of how they can be shared and how TailwindCSS will intelligently merge multiple presets with a project config.
+
+### UI Stack
+
+The workspace leverages [TailwindCSS](https://tailwindcss.com/) and [fluid-tailwind](https://fluid.tw/) for styling with components from [shadcn/ui](https://ui.shadcn.com/) powered by [Radix UI](https://www.radix-ui.com/).
+
+SPA routing is provided by [react-router](https://reactrouter.com/). It is fairly easy to swap with an alternative such as [@tanstack/router](https://tanstack.com/router/latest) if required.
+
+[Syncpack](https://jamiemason.github.io/syncpack/) helps ensure that dependency versions are in sync across the workspace.
+
+[Biome](https://biomejs.dev/) provides high-performance linting and formatting that absolutely crushes ESLint and Prettier.
+
+`@workspace/react-ui` and the Tailwind presets are buildable with Vite and `tsup` respectively to provide a jump-start for design systems, custom component libraries, and/or publishing internal packages.
+
+> Need help? Refer to the [Shameless Plug](#shameless-plug) below.
+
+## Prerequisites
+
+This workspace assumes `pnpm` and node are installed and that it is in a linux/unix environment. WSL2 is recommended for Windows users otherwise scripts may need to be reviewed and adjusted for compatibility.
+
+Ensure `use-node-version` in `.npmrc` matches the node version you wish to use in this workspace.
+
+Ensure that `apps/client/.env` exists (copy from `.env.example`).
+
+## Development
+
+Install dependencies:
+
+```sh
+pnpm install
+```
+
+Run an initial build:
+
+```sh
+pnpm build
+```
+
+Start the dev server at http://localhost:5173:
+
+```sh
+pnpm dev
+```
+
+The example React+Vite SPA is at `apps/client`.
+
+The shadcn CLI is configured to manage components in `packages/react-ui` with package name: `@workspace/react-ui`.
+
+## Maintenance
+
+Use [pnpm](https://pnpm.io/) to manage the workspace.
+
+After installing or updating packages use syncpack to ensure consistent versions are used across the workspace:
+
+```sh
+pnpm syncpack list-mismatches
+pnpm syncpack fix-mismatches
+```
+
+Run `pnpm dedupe` from time-to-time (dry run: `pnpm dedupe --check`).
+
+## Using shadcn CLI
+
+Run the following from the root of this workspace:
+
+```sh
+pnpm shadcn add [component]
+```
+
+The command executes the shadcn CLI in `packages/react-ui` and outputs to the package's `src/` directory per its config at `packages/react-ui/components.json`.
+
+Substitute this command anywhere you see CLI installation commands in the [shadcn/ui docs](https://ui.shadcn.com/docs).
+
+For example `npx shadcn@latest add button` in the docs becomes `pnpm shadcn add button` in this workspace.
+
+The `postshadcn` script target in the root `package.json` will be automatically triggered after the `shadcn` command runs. It will:
+
+- run a script to fix the import paths of [node subpath imports](https://nodejs.org/api/packages.html#subpath-imports) that the shadcn CLI unfortunately borks
+- run biome to lint and format the generated files
+
+**Do not be afraid of red console errors output by biome!** **Read it!**
+
+Biome is able to automatically fix many issues however a decent percentage of components will still require your attention to fix. It is simply alerting you to what files you need to review.
+
+**Always review every file generated by the shadcn CLI.**
+
+Remember the whole point of shadcn/ui is to provide a _foundation_ of components for _you_ to _customize_ and _build on_.
+
+Refer to the react-ui package [README](packages/react-ui/README.md) of the for more.
+
+## Workspace Layout
+
+The layout of this _workspace_ is designed to support multiple _projects_ (applications or packages) that share logic and components.
+
+Per `pnpm-workspace.yaml` applications are under `apps/` and packages/libraries are under `packages/`.
+
+Refer to the `package.json` of a given package for its `name`. This workspace follows the package naming convention: `@workspace/[package-name]`.
+
+### Packages
+
+Every package has its own `README.md`.
+
+#### Shared Core
+
+`packages/data` (`@workspace/data`) is an isomorphic (client _and_ server) package with only a peer dependency on `zod`.
+
+It is intended to serve as a common dependency of other front-end or back-end applications and packages in the workspace. It does not contain any code that is dependent on either a browser or server-side/Node environment.
+
+This package is the home "source of truth" for shared data, types/interfaces, [zod schemas](https://zod.dev/), and utilities to ensure data integrity and interoperability across the workspace.
+
+#### React
+
+React components are organized into separate packages:
+
+- `packages/react-ui` core UI components package and the target for shadcn CLI (refer to its README)
+- `packages/react-layout` reusable layout components (header, navigation, footer, etc)
+- `packages/react-landing` reusable landing page components
+
+The `react-ui` package has no internal depenencies other than `@workspace/data` and the internal TailwindCSS packages. It can serve as a common dependency of other `react-*` packages.
+
+Tip: to keep the dependency graph simple and avoid circular dependencies: `react-*` packages should only depend on `react-ui`, and they should not depend on each other.
+
+#### TailwindCSS
+
+TailwindCSS configuration is managed via shareable [tailwind presets](https://tailwindcss.com/docs/presets):
+
+- `packages/tw-preset-shadcn` (`@workspace/tw-preset-shadcn`)
+- `packages/tw-preset-workspace` (`@workspace/tw-preset-workspace`)
+
+`tw–preset-shadcn` implements the shadcn/ui [installation](https://ui.shadcn.com/docs/installation/manual) and also exports a factory function `createShadcnPreset()` for additional flexibility.
+
+`packages/tw-preset-workspace` is a workspace-wide preset that adds additional customizations including [fluid-tailwind](https://fluid.tw/). It includes the `tw-preset-shadcn` in its `presets` array.
+
+The `cn()` style utility including `clsx()` and `tailwind-merge`configuration is housed in its own package:
+
+- `packages/tailwind-style` 
+
+This package stores `tailwind-merge` customizations and adds support for `fluid-tailwind` and any other additions to the standard tailwindcss library but may be added by a preset or plugin.
+
+It is important to [customize `tailwind-merge`](https://github.com/dcastil/tailwind-merge/blob/main/docs/configuration.md#usage-with-custom-tailwind-config) to support any non-default additions to tailwindcss. This key step is almost always overlooked by the vast majority of shadcn/ui projects and starters that use custom classes and configurations.
+
+Run `pnpm build` and restart the dev server after making significant changes to the presets or `@workspace/style`.
+
+## Shameless Plug
+
+> If you or your team needs professional help to create a design system, publish internal packages, manage shadcn/ui in a monorepo, or to customize tailwindcss with presets or plugins, please contact me at hello@firxworx.com with subject _Consulting Inquiry_. 
+
+> I can help your team rapidly score value and productivity gains. Consider that a few hours at an ad-hoc hourly consulting rate with a screenshare or two is _way cheaper_ than having a team stuck for days or weeks on a learning curve that I have already invested in.
+
+> I also offer a full suite of extended shadcn/ui components that are completely styled using _fluid responsive_ classes, an expanded palette, fixed bugs, valuably and time saving form components, plus improved a11y that I maintain for consulting projects. [Storybook](https://storybook.js.org/) is included. Differentiate your product & brand with maintainable components that don't look like yet another cookie-cutter shadcn/ui project. Save piles of time with fluid-responsive components.
+
+## Motivation
+
+Vercel spends a huge marketing budget to ensure there are countless examples and reams of LLM training data for NextJS + shadcn/ui.
+
+There are comparatively few examples of Vite + React + shadcn/ui on GitHub and almost none are in a monorepo. 
+
+With precious little training data to regurgitate, the LLM's of today are prone to hallucination and significant mistakes despite the immense popularity of this stack.
+
+This workspace aims to provide an example for both human developers and LLM's.
+
+Vite is a best-in-class build tool that serves as the backbone of many popular frameworks including Astro ❤️, Vue, Svelte, Solid, Qwik, Vike, Lit, and more.
+
+The codebase is intended to be ready to serve as a foundation for your next project. It is complete enough to offer a working application that "flexes" the workspace while being simple enough to be easily understood and customized.
+
+The shadcn/ui components used in the example application have minimal to no customization. The goal is to provide a meaningful head start without getting in the way.
+
+## License
+
+MIT. (c) 2024 Bitcurve Systems Inc. (Canada) & Kevin Firko (@firxworx)
+
+SVG icons by Lucide are distributed under ISC license: https://lucide.dev/license
+
+Illustrations in the example application are from https://popsy.co/illustrations.

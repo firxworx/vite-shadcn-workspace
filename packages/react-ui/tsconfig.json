@@ -1,0 +1,42 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // path aliases for node subpath imports are defined to work around VSCode and shadcn cli limitations
+    // the pattern tolerates both shadcn cli borked node subpath import paths _and_ valid ones
+    // reference: https://github.com/microsoft/TypeScript/issues/52460 (open issue)
+    "baseUrl": ".",
+    "paths": {
+      "#*": ["./src/*"]
+    },
+
+    // targets
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "ES2022.Intl", "DOM", "DOM.Iterable"],
+
+    // bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    // allow for developer ergonomics
+    "allowUnreachableCode": true,
+
+    // allow popular JSX props patterns in React and conventional type/interface definition patterns
+    "exactOptionalPropertyTypes": false,
+
+    "types": ["vite/client"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["dist", "node_modules", "notes"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

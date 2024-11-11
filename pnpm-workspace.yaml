@@ -1,0 +1,11 @@
+packages:
+  # include the following directories in the workspace
+  - 'apps/**/*'
+  - 'packages/**/*'
+
+  # explicitly exclude certain directories from the workspace
+  - '!notes/**/*'
+  - '!wip/**/*'
+  - '!**/docs/**'
+  - '!**/scripts/**'
+  - '!**/workflow/**'

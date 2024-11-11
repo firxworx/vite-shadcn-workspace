@@ -1,0 +1,68 @@
+{
+  "name": "vite-shadcn-workspace",
+  "private": true,
+  "type": "module",
+  "description": "template for pnpm workspace with vite, react, typescript, tailwindcss, and shadcn",
+  "license": "MIT",
+  "keywords": ["pnpm", "workspace", "vite", "react", "typescript", "shadcn", "tailwindcss", "boilerplate", "starter"],
+  "author": {
+    "name": "Kevin Firko",
+    "url": "https://firxworx.com",
+    "email": "hello@firxworx.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/firxworx/vite-shadcn-workspace"
+  },
+
+  "scripts": {
+    "shadcn": "pnpm --filter @workspace/react-ui shadcn",
+    "postshadcn": "bash ./packages/react-ui/fix-shadcn-import-paths.sh && pnpm biome check --write packages/react-ui",
+    "setup": "pnpm run reset && pnpm install",
+    "reset": "pnpm dlx rimraf --glob ./**/node_modules && pnpm dlx rimraf --glob ./**/dist",
+    "dev": "NODE_OPTIONS=\"--max-old-space-size=1024\" NODE_ENV=development pnpm --filter '{apps/**}' --stream dev",
+    "build": "NODE_ENV=production pnpm -r --stream build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "test": "CI=true NODE_ENV=test pnpm -r --stream run test",
+    "typecheck": "pnpm -r --stream typecheck",
+    "preflight": "pnpm lint:fix && pnpm typecheck && pnpm test",
+    "ship": "pnpm build && pnpm --filter '{apps/**}' --stream ship",
+    "ci:build": "pnpm build",
+    "ci:lint": "pnpm lint",
+    "ci:test": "CI=true NODE_ENV=test pnpm run test",
+    "ci:typecheck": "CI=true pnpm typecheck",
+    "ci:changeset": "changeset",
+    "ci:version": "changeset version",
+    "ci:publish": "changeset publish",
+    "deps:update": "pnpm update -r -i && pnpm syncpack fix-mismatches && pnpm install && pnpm dedupe",
+    "deps:update:latest": "pnpm update -r -i --latest && pnpm syncpack fix-mismatches && pnpm install && pnpm dedupe",
+    "deps:dedupe:check": "pnpm dedupe --check",
+    "deps:dedupe:fix": "pnpm dedupe",
+    "deps:sync:check": "pnpm syncpack list-mismatches",
+    "deps:sync:fix": "pnpm syncpack fix-mismatches",
+    "workspace:pwd": "pnpm -w pwd",
+    "workspace:ls": "pnpm m ls --json --depth=-1 | node -e \"const path = require('path'); console.log(JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf-8')).map((m) => path.relative(__dirname, m.path)).filter(Boolean))\"",
+    "kill:port": "bash -c 'pids=$(lsof -i :$0 | grep LISTEN | awk \"{print \\$2}\"); if [[ -z $pids ]]; then echo \"No process found running on port $0\"; else echo \"Killing: $pids\"; echo $pids | xargs kill; fi'",
+    "kill:vscode-server": "ps uxa | grep .vscode-server | awk '{print $2}' | xargs kill",
+    "pnpm:env:use:lts": "pnpm env use --global lts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@changesets/cli": "^2.27.9",
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/node": "^22.8.7",
+    "@vitejs/plugin-react": "^4.3.3",
+    "globals": "^15.12.0",
+    "jsdom": "^25.0.1",
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "syncpack": "^13.0.0",
+    "tailwindcss": "^3.4.14",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vite-plugin-dts": "^4.3.0",
+    "vite-tsconfig-paths": "^5.1.0",
+    "vitest": "^2.1.4"
+  }
+}

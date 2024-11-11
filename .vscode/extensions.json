@@ -1,0 +1,14 @@
+{
+  "recommendations": ["biomejs.biome", "bradlc.vscode-tailwindcss"],
+  "unwantedRecommendations": [
+    "bmewburn.vscode-intelephense-client",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "expo.vscode-expo-tools",
+    "firsttris.vscode-jest-runner",
+    "nrwl.angular-console",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "vercel.turbo-vsc"
+  ]
+}

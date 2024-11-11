@@ -1,0 +1,28 @@
+{
+  "name": "@workspace/data",
+  "type": "module",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "sideEffects": false,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --config tsup.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.7",
+    "tsup": "^8.3.5",
+    "type-fest": "^4.26.1",
+    "typescript": "^5.6.3",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "zod": "^3.23.8"
+  }
+}

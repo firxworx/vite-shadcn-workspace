@@ -1,0 +1,40 @@
+{
+  "name": "@workspace/tw-style",
+  "type": "module",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --config tsup.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "package.json",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "tailwindcss": "^3.4.14",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@fluid-tailwind/tailwind-merge": "^0.0.3",
+    "tailwind-merge": "^2.5.4"
+  }
+}

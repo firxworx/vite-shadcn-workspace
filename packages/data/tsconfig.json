@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+
+    "outDir": "dist",
+    "rootDir": "src",
+
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    // preserve jsdoc comments
+    "removeComments": false,
+
+    // generate types and their sourcemaps
+    "declaration": true,
+    "declarationMap": true,
+
+    // loosen for developer ergnomics
+    "exactOptionalPropertyTypes": false,
+
+    // linting
+    "strictFunctionTypes": true
+  },
+  "include": ["../../reset.d.ts", "src/**/*.d.ts", "src/**/*.ts"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "test",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/test/**",
+    "jest.config.ts",
+    "vitest.config.ts"
+  ]
+}

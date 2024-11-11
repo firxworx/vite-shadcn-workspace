@@ -1,0 +1,34 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ES2022"],
+    "removeComments": false,
+
+    // tailwind's exported types are not very strict
+    "exactOptionalPropertyTypes": false
+
+    // avoid typescript import aliases so we can import directly from src in tailwind.config.ts files
+    // this enables fast live reload (otherwise we must introduce a build/watch step that cramps dev workflow)
+    //
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"]
+    // },
+  },
+  "include": ["../../reset.d.ts", "src/**/*.d.ts", "src/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/test/**",
+    "jest.config.ts",
+    "vitest.config.ts"
+  ]
+}

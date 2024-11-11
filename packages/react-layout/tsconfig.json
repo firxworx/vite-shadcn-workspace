@@ -1,0 +1,53 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // explicitly strict
+    "strict": true,
+    "strictNullChecks": true,
+
+    // targets
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "ES2022.Intl", "DOM", "DOM.Iterable"],
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+
+    // types
+    "declaration": true,
+    "declarationMap": true,
+
+    // import path alias (workaround for limited support in current VSCode for node subpath imports)
+    "baseUrl": ".",
+    "paths": {
+      "#*": ["./src/*"]
+    },
+
+    // bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    // linting
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictFunctionTypes": true,
+
+    // a more specific lint rule is preferred that allows unused variables if prefixed by underscore
+    "noUnusedLocals": false,
+
+    // early returns are common in dev and debug scenarios where the following is annoying
+    "allowUnreachableCode": true,
+
+    // allow popular JSX props patterns in React and conventional type/interface definition patterns
+    "exactOptionalPropertyTypes": false,
+
+    "types": ["vite/client"]
+  },
+  "include": ["src"]
+
+  // uncomment with tsconfig.node.json reference (+ add vite.config.ts) to enable vite build of this package
+  // "references": [{ "path": "./tsconfig.node.json" }]
+}

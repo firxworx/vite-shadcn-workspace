@@ -1,0 +1,43 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "ES2022.Intl", "DOM", "DOM.Iterable"],
+
+    // project paths
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // import path alias
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // bundler configuration
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "removeComments": true,
+
+    // disable to allow for common JSX props and type definition patterns
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["../../reset.d.ts", "src"],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "src/**/*.wip.ts",
+    "src/**/*.wip.tsx"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

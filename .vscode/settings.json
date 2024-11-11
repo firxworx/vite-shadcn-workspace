@@ -1,0 +1,73 @@
+{
+  // use project version of typescript in vscode
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  // ensure vscode uses pnpm vs. npm
+  "npm.packageManager": "pnpm",
+
+  // ensure tailwindcss extension is the default formatter for css files
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.cjs": "javascript",
+    "*.mjs": "javascript",
+    "*.mdx": "mdx"
+  },
+
+  // disable eslint and prettier as this workspace uses biome
+  "eslint.enable": false,
+  "prettier.enable": false,
+
+  // editor configuration
+  "editor.guides.bracketPairs": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.indentation": true,
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+
+  // ensure biome is the default formatter (vs. esbenp.prettier-vscode)
+  "editor.defaultFormatter": "biomejs.biome",
+
+  // ensure biome is enabled per language-specific settings
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  // autocorrect lint/format issues on save with biome
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+
+  // ensure intellisense offers autocomplete for tailwind classes
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  // set tailwind root font size to match the project preset so intellisense calculates correct px for rem units
+  // rootFontSize 16 is the default of both html documents and tailwindcss
+  "tailwindCSS.rootFontSize": 16,
+  "tailwindCSS.codeActions": true,
+
+  // exclude lockfile and node_modules content from command palette search results
+  "search.exclude": {
+    "pnpm-lock.yaml": true,
+    "**/node_modules/*": true,
+    "tmp/*": true
+  }
+}

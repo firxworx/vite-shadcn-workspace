@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["../../reset.d.ts", "src/**/*.d.ts", "src/**/*.ts"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "test",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/test/**",
+    "jest.config.ts",
+    "vitest.config.ts"
+  ]
+}

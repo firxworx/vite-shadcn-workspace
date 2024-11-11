@@ -1,0 +1,105 @@
+# dependencies
+node_modules
+
+# build output
+dist
+build
+
+# workflow
+docs/
+notes/
+tmp/
+
+# development
+.changeset
+.vscode
+.github
+.git
+*.rest
+
+# frameworks
+.astro/
+.dynamodb/
+.cdk.staging/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.turbo/
+.fusebox/
+.tern-port/
+.vercel/
+.vite/
+
+# logs + cache
+logs
+*.log
+.cache/
+*.bak
+
+# env files
+.env
+.env.*
+.nx-cloud.env
+
+# ignore files
+.gitignore
+
+# configs
+.editorconfig
+biome.jsonc
+eslint.*
+prettier.config.*
+syncpack.config.*
+tsup.config.*
+vite.config.*
+vitest.config.*
+
+# markdown
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+LICENSE.md
+README.md
+*README*.md
+*NOTES*.md
+*DOCS*.md
+
+# docker
+Dockerfile
+docker-compose.yml
+
+# common secrets
+*.pem
+*.key
+*.csr
+*.crt
+*.cert
+*.certificate
+*.credentials.json
+*.p12
+*.pfx
+*.secret.*
+
+# diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# coverage and related tools such as instanbul
+/coverage
+.nyc_output
+lib-cov
+*.lcov
+
+# tests
+.test.js
+.spec.js
+.test.ts
+.spec.ts
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# misc
+.DS_Store

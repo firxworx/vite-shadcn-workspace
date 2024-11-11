@@ -1,0 +1,9 @@
+name = "vite-shadcn-workspace"
+compatibility_date = "2024-11-05"
+compatibility_flags = ["nodejs_compat"]
+
+pages_build_output_dir = "dist"
+send_metrics = false
+
+[env]
+production = { }
