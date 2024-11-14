@@ -17,7 +17,7 @@
 
   "scripts": {
     "shadcn": "pnpm --filter @workspace/react-ui shadcn",
-    "postshadcn": "bash ./packages/react-ui/fix-shadcn-import-paths.sh && pnpm biome check --write packages/react-ui",
+    "postshadcn": "bash ./packages/react-ui/fix-shadcn-import-paths.sh && pnpm install && pnpm biome check --write packages/react-ui",
     "setup": "pnpm run reset && pnpm install",
     "reset": "pnpm dlx rimraf --glob ./**/node_modules && pnpm dlx rimraf --glob ./**/dist",
     "dev": "NODE_OPTIONS=\"--max-old-space-size=1024\" NODE_ENV=development pnpm --filter '{apps/**}' --stream dev",
