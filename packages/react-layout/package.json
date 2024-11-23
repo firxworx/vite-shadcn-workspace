@@ -36,11 +36,9 @@
   },
   "exports": {
     "./package.json": "./package.json",
+    "./styles.css": "./src/styles.css",
     "./errors": [
       "./src/components/errors/*.tsx"
-    ],
-    "./landing": [
-      "./src/components/landing/*.tsx"
     ],
     "./components/*": [
       "./src/components/*.tsx"

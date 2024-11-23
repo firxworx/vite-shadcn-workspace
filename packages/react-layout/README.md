@@ -2,28 +2,28 @@
 
 Package with React components related to application layout that may be used across multiple apps.
 
-This package depends on `@workspace/react-ui`.
+This package depends on components in `@workspace/react-ui`.
 
-This package is currently configured as a pure TypeScript package to use within the workspace.
+Currently configured as a pure TypeScript package to use within the workspace; refer to `exports` in `package.json`.
 
-A Vite configuration has been added to assist with development and to support the option to publish this package (additional configuration required). Run a build: 
+A Vite configuration has been added to assist with development and to support the option to publish this package in future (with additional configuration required). To run a build: 
 
 ```sh
 pnpm --filter @workspace/react-layout build
 ```
 
-Peer dependencies include:
+Refer to `package.json` for all dependencies. Peer dependencies include:
 
 - `react-router-dom` for router-specific `NavLink` + `Link` components
 - `react-error-boundary` for implementing error boundaries and fallbacks
 
-Refer to `package.json` for all dependencies.
-
-Downstream projects powered by Vite should use a TypeScript path alias resolution plugin such as `vite-tsconfig-paths` or manually map the directory paths in their `vite.config.ts`.
+Downstream projects powered by Vite can use a TypeScript path alias resolution plugin such as `vite-tsconfig-paths` or manually map the directory paths in their `vite.config.ts`.
 
 ## Path Aliases & Subpath Imports
 
 The hash specifier `#` used as an import alias within this package is a requirement of [node subpath imports](https://nodejs.org/api/packages.html#subpath-imports) now supported in TypeScript v5.4+.
+
+A redundant TypeScript `paths` defition exists in `tsconfig.json` as a temporary measure to support tooling that lags behind in support for subpath imports.
 
 Refer to [docs/node-subpath-imports-and-aliases.md](../../docs/node-subpath-imports-and-aliases.md) for details.
 
