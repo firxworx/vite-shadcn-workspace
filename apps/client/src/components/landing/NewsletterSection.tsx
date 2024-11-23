@@ -7,9 +7,9 @@ import { Heading } from '@workspace/react-ui/components/ui/heading'
 export interface CTASectionProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {}
 
 /**
- * CTA (call-to-action) section for index/landing page with newsletter sign-up form.
+ * Newsletter CTA (call-to-action) section for index/landing page with sign-up form.
  */
-export function CTASection({ id, className, ...restProps }: CTASectionProps): JSX.Element {
+export function NewsletterSection({ id, className, ...restProps }: CTASectionProps): JSX.Element {
   const ssrId = useId()
   const sectionId = id || ssrId
 

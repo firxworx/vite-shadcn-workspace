@@ -8,11 +8,10 @@ export interface LandingSectionHeaderProps {
   lead?: string
   title: string
   description?: string | React.ReactNode
-
   leadVariant?: LeadProps['variant']
 }
 
-interface LeadProps {
+export interface LeadProps {
   variant: 'pill' | 'gradient'
   children?: React.ReactNode
 }
@@ -46,6 +45,9 @@ export function LandingSectionHeader({
   )
 }
 
+/**
+ * Lead text to render above a landing section's primary heading.
+ */
 function Lead({ variant = 'pill', children }: LeadProps): JSX.Element | null {
   if (!children) {
     return null
