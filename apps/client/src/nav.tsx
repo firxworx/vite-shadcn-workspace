@@ -1,4 +1,4 @@
-import type { AppNavLink, AppNavLinkGroup } from '@workspace/data'
+import type { AppNavLink } from '@workspace/data'
 
 export const NAV_LINKS: AppNavLink[] = [
   {
