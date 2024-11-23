@@ -25,14 +25,19 @@
       }
     }
   },
-  "files": ["dist", "README.md", "package.json", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "LICENSE"
+  ],
   "devDependencies": {
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "peerDependencies": {
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7"
   }
 }

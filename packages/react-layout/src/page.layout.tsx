@@ -6,10 +6,10 @@ export interface PageLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Page Layout component that renders a `section` element with standard vertical padding.
- * Specify `as` prop to render a compatible alternative element such as a 'div'.
+ * Page Layout renders a `section` element with standard vertical padding.
+ * Specify `as` prop to render an alternative element such as a 'div'.
  *
- * This component is intended to be used within an application layout.
+ * This component is intended to be used as a child of the application layout.
  */
 export const PageLayout = React.forwardRef<HTMLDivElement, PageLayoutProps>(function PageLayout(
   { as = 'section', className, children, ...restProps },

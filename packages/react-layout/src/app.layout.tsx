@@ -2,9 +2,9 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { cn } from '@workspace/tw-style'
 import type { AppNavLink, AppNavLinkGroup, SocialMediaDto } from '@workspace/data'
 
-import { LayoutHeader } from './layout-header'
-import { LayoutFooter } from './layout-footer'
-import { LayoutMain } from './layout-main.tsx'
+import { LayoutHeader } from './components/layout/layout-header.tsx'
+import { LayoutFooter } from './components/layout/layout-footer.tsx'
+import { LayoutMain } from './components/layout/layout-main.tsx'
 
 export interface AppLayoutProps {
   navLinks?: AppNavLink[]

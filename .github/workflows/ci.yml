@@ -77,6 +77,11 @@ jobs:
         id: install-dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Copy .env.example to .env for CI build
+        run: |
+          cp .env.example .env
+          cp apps/client/.env.example apps/client/.env
+
       - name: Run lint checks
         id: eslint
         run: pnpm ci:lint

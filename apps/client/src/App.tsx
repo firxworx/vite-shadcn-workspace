@@ -4,7 +4,7 @@ import { RouterProvider } from 'react-router-dom'
 import { AppErrorBoundary } from '@workspace/react-layout'
 import { ScreenSpinner } from '@workspace/react-ui/components/ui/spinner'
 
-import { router } from './router'
+import { router } from '@/router'
 import { AppContextProviders } from '@/providers/AppContextProviders'
 
 /**

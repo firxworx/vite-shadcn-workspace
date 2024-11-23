@@ -1,19 +1,13 @@
-import './style.css'
+import './styles.css'
 
 // error boundaries
 export * from './components/errors/app-error.boundary'
 export * from './components/errors/router-root-error.boundary'
 
 // application layout
-export * from './layouts/app.layout'
-export * from './layouts/layout-header'
-export * from './layouts/layout-footer'
+export * from './app.layout'
+export * from './components/layout/layout-header'
+export * from './components/layout/layout-footer'
 
 // page layout (use within application layout)
-export * from './layouts/page.layout'
-
-// index/landing page sections & components
-export * from './components/landing/landing.components'
-export * from './components/landing/hero-section'
-export * from './components/landing/features-section'
-export * from './components/landing/cta-section'
+export * from './page.layout'

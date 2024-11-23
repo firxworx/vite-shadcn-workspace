@@ -17,6 +17,8 @@
     "declarationMap": true,
 
     // import path alias (workaround for limited support in current VSCode for node subpath imports)
+    // the pattern tolerates both shadcn cli borked node subpath import paths _and_ valid ones
+    // reference: https://github.com/microsoft/TypeScript/issues/52460 (open issue)
     "baseUrl": ".",
     "paths": {
       "#*": ["./src/*"]

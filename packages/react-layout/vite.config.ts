@@ -28,7 +28,7 @@ const {
   optionalDependencies: { [key: string]: string }
 }
 
-// example to remove scope from package name if present (e.g. @scope/example -> example)
+// example to remove scope from package name if present (i.e. '@scope/example' -> 'example')
 // const basePackageName = name.match(/[^/]+$/)?.[0] ?? name
 
 /**
@@ -53,7 +53,7 @@ export default defineConfig(({ mode }) => ({
     copyPublicDir: false,
     cssCodeSplit: true,
     lib: {
-      name: 'UI',
+      name: 'Layout',
 
       // code entrypoint (this can also be a dictionary or array of multiple entrypoints)
       entry: path.resolve(import.meta.dirname, 'src/index.ts'),
@@ -87,7 +87,7 @@ export default defineConfig(({ mode }) => ({
         /^@radix-ui\/*/,
         /^@tanstack\/*/,
 
-        // exclude workspace packages (note this may need to be adjusted as project evolves)
+        // exclude workspace packages
         /^@workspace\/*/,
 
         // ... keep adding as new requirements come forward that must be external/peer dependencies ...

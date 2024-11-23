@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client'
 
 import '@fontsource-variable/inter'
 import '@fontsource-variable/inter/opsz-italic.css'
-
 import './style/tailwind.css'
-import App from './App.tsx'
-import { IS_CLIENT } from '@/config.ts'
+
+import App from './App'
+import { IS_CLIENT } from '@/config'
 
 const mountNode = document.getElementById('root')
 

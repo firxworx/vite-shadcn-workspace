@@ -2,7 +2,7 @@ import { useId } from 'react'
 
 import { Heading } from '@workspace/react-ui/components/ui/heading'
 import { cn } from '@workspace/tw-style'
-import { LandingSectionHeader } from '#components/landing/landing.components.tsx'
+import { LandingSectionHeader } from '@/components/landing/SharedComponents'
 
 export interface FeaturesSectionProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {}
 
@@ -58,6 +58,9 @@ export function FeaturesSection({ id, className, ...restProps }: FeaturesSection
   )
 }
 
+/**
+ * List of features for landing FeaturesSection.
+ */
 function FeaturesList({ features, className }: FeaturesListProps): JSX.Element {
   return (
     <ul className={cn('flex flex-col justify-center ~gap-4/6', className)}>
@@ -73,6 +76,9 @@ function FeaturesList({ features, className }: FeaturesListProps): JSX.Element {
   )
 }
 
+/**
+ * Mock/placeholder image frame.
+ */
 function MockImageFrame({ className, imgClassName }: { className?: string; imgClassName?: string }): JSX.Element {
   return (
     <div

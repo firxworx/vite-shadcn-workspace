@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router-dom'
 import { getRouteErrorMessage } from '@workspace/data'
-import { PageLayout } from '@workspace/react-layout'
+import { PageLayout } from '@workspace/react-layout/page.layout'
 
 export default function ErrorPage(): JSX.Element {
   const error = useRouteError()
