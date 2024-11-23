@@ -14,7 +14,7 @@ pnpm --filter @workspace/react-layout build
 
 Refer to `package.json` for all dependencies. Peer dependencies include:
 
-- `react-router-dom` for router-specific `NavLink` + `Link` components
+- `react-router` for router-specific `NavLink` + `Link` components
 - `react-error-boundary` for implementing error boundaries and fallbacks
 
 Downstream projects powered by Vite can use a TypeScript path alias resolution plugin such as `vite-tsconfig-paths` or manually map the directory paths in their `vite.config.ts`.

@@ -41,7 +41,7 @@ export function getErrorMessage(maybeError?: unknown): string | undefined {
 }
 
 /**
- * Return the string error message of the error object as returned by react-router-dom's `useRouteError` (v6+) hook.
+ * Return the string error message of the error object as returned by react-router's `useRouteError` (v6+) hook.
  *
  * - `string` input is returned as-is
  * - objects return `statusText` or `message` if available with a fallback to a generic message

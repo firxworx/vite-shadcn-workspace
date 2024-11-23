@@ -1,5 +1,5 @@
 import type React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 import { cn } from '@workspace/tw-style'
 import { ThemeMenu } from '@workspace/react-ui/components/layout/theme-menu'
