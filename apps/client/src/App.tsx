@@ -1,5 +1,5 @@
 import { Suspense, type ErrorInfo } from 'react'
-import { RouterProvider } from 'react-router-dom'
+import { RouterProvider } from 'react-router/dom'
 
 import { AppErrorBoundary } from '@workspace/react-layout'
 import { ScreenSpinner } from '@workspace/react-ui/components/ui/spinner'
@@ -22,7 +22,7 @@ function App(): JSX.Element {
         <AppContextProviders>
           <AppErrorBoundary onError={handleError}>
             <Suspense fallback={<ScreenSpinner />}>
-              <RouterProvider router={router} fallbackElement={<ScreenSpinner />} />
+              <RouterProvider router={router} />
             </Suspense>
           </AppErrorBoundary>
         </AppContextProviders>
