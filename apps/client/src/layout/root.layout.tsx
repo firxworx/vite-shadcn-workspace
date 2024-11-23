@@ -1,4 +1,4 @@
-import { ScrollRestoration } from 'react-router-dom'
+import { ScrollRestoration } from 'react-router'
 import { AppLayout } from '@workspace/react-layout/app.layout'
 
 import { NAV_LINKS } from '@/nav'

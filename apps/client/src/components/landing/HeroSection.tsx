@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 import { cn } from '@workspace/tw-style'
 import { LinkButton } from '@workspace/react-ui/components/ui/link-button'

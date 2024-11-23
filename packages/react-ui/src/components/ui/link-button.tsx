@@ -19,7 +19,7 @@ export interface LinkButtonProps
  * Supports similar props to Button including `disabled`.
  *
  * The `asChild` prop powered by radix-ui `Slot` supports creating links of any router library
- * including `react-router-dom` / Remix, NextJS, Astro, etc.
+ * including `react-router` / Remix, NextJS, Astro, etc.
  *
  * Renders an `<a>` element by default if no alternative is provided via the `asChild` pattern.
  */

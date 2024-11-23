@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { PageLayout } from '@workspace/react-layout/page.layout'
 
 export default function AboutPage(): JSX.Element {
