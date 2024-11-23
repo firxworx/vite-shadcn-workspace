@@ -12,13 +12,42 @@
     "access": "restricted"
   },
   "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
     "test": "vitest"
   },
+  "files": [
+    "src",
+    "dist",
+    "package.json",
+    "README.md",
+    "tailwind.config.ts",
+    "src/styles.css"
+  ],
   "imports": {
-    "#*": "./src/*"
+    "#*": [
+      "./dist/*",
+      "./src/*",
+      "./src/*.ts",
+      "./src/*.tsx"
+    ]
   },
   "exports": {
     "./package.json": "./package.json",
+    "./errors": [
+      "./src/components/errors/*.tsx"
+    ],
+    "./landing": [
+      "./src/components/landing/*.tsx"
+    ],
+    "./components/*": [
+      "./src/components/*.tsx"
+    ],
+    "./*.layout": [
+      "./src/*.layout.tsx"
+    ],
     ".": "./src/index.ts"
   },
   "devDependencies": {
@@ -35,6 +64,7 @@
     "@workspace/tw-style": "workspace:*",
     "autoprefixer": "^10.4.20",
     "fluid-tailwind": "^1.0.3",
+    "glob": "^11.0.0",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.47",
     "postcss-discard-comments": "^7.0.3",
