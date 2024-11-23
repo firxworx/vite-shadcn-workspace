@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { Link, NavLink, type NavLinkProps } from 'react-router-dom'
+import { Link, NavLink, type NavLinkProps } from 'react-router'
 import { useWindowScroll, useDebouncedValue } from '@mantine/hooks'
 
 import { cn } from '@workspace/tw-style'

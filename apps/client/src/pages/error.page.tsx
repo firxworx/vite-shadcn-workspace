@@ -1,4 +1,4 @@
-import { useRouteError } from 'react-router-dom'
+import { useRouteError } from 'react-router'
 import { getRouteErrorMessage } from '@workspace/data'
 import { PageLayout } from '@workspace/react-layout/page.layout'
 
