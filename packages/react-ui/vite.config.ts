@@ -87,6 +87,9 @@ export default defineConfig(({ mode }) => ({
         /^@radix-ui\/*/,
         /^@tanstack\/*/,
 
+        // exclude workspace packages (note this may need to be adjusted as project evolves)
+        /^@workspace\/*/,
+
         // ... keep adding as new requirements come forward that must be external/peer dependencies ...
       ],
       output: {
