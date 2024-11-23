@@ -29,9 +29,9 @@
     "LICENSE"
   ],
   "devDependencies": {
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "tsup": "^8.3.5",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@fluid-tailwind/tailwind-merge": "^0.0.3",

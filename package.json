@@ -4,7 +4,17 @@
   "type": "module",
   "description": "template for pnpm workspace with vite, react, typescript, tailwindcss, and shadcn",
   "license": "MIT",
-  "keywords": ["pnpm", "workspace", "vite", "react", "typescript", "shadcn", "tailwindcss", "boilerplate", "starter"],
+  "keywords": [
+    "pnpm",
+    "workspace",
+    "vite",
+    "react",
+    "typescript",
+    "shadcn",
+    "tailwindcss",
+    "boilerplate",
+    "starter"
+  ],
   "author": {
     "name": "Kevin Firko",
     "url": "https://firxworx.com",
@@ -14,7 +24,6 @@
     "type": "git",
     "url": "git+https://github.com/firxworx/vite-shadcn-workspace"
   },
-
   "scripts": {
     "shadcn": "pnpm --filter @workspace/react-ui shadcn",
     "postshadcn": "bash ./packages/react-ui/fix-shadcn-import-paths.sh && pnpm install && pnpm biome check --write packages/react-ui",
@@ -49,20 +58,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@changesets/cli": "^2.27.9",
+    "@changesets/cli": "^2.27.10",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/node": "^22.8.7",
+    "@types/node": "^22.9.3",
     "@vitejs/plugin-react": "^4.3.3",
     "globals": "^15.12.0",
     "jsdom": "^25.0.1",
     "rollup-plugin-preserve-directives": "^0.4.0",
     "syncpack": "^13.0.0",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "tsup": "^8.3.5",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.10",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
     "vite-plugin-dts": "^4.3.0",
-    "vite-tsconfig-paths": "^5.1.0",
-    "vitest": "^2.1.4"
+    "vite-tsconfig-paths": "^5.1.3",
+    "vitest": "^2.1.5"
   }
 }
