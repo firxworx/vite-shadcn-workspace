@@ -1,26 +1,16 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
-import { ScrollRestoration } from 'react-router-dom'
 
-import { AppLayout } from '@workspace/react-layout'
-
+import RootLayout from '@/layout/root.layout'
 import IndexPage from '@/pages/index.page'
 import ErrorPage from '@/pages/error.page'
-import { NAV_LINKS } from '@/nav'
-import { CONFIG } from '@/config'
 
-function ProjectLayout(): JSX.Element {
-  return (
-    <>
-      <AppLayout navLinks={NAV_LINKS} socialMedia={CONFIG.socialMedia} />
-      <ScrollRestoration />
-    </>
-  )
-}
-
+/**
+ * App routes as an array of react-router v6 `RouteObject`s.
+ */
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <ProjectLayout />,
+    element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -43,4 +33,7 @@ const routes: RouteObject[] = [
   },
 ]
 
+/**
+ * react-router v6 BrowserRouter.
+ */
 export const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(routes)
